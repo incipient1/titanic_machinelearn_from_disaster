@@ -22,7 +22,7 @@ import matplotlib
 
 
 ```python
-titanic = pd.read_csv('E:\\Python_learning\\learning_DC\\chapter_4\\train.csv')
+titanic = pd.read_csv('train.csv')
 s = '平均生存概率：{0:.2f} %'.format(titanic.describe().loc['mean','Survived'] * 100)
 s
 ```
@@ -1358,7 +1358,7 @@ sns.heatmap(y,mask=mask,square=False,vmin=-1,vmax=1,\
             robust=True,annot=True,center=1,linewidth=0.5,fmt='>5.2f',ax=ax,
             cbar_ax=cbar_ax,cbar_kws={"orientation": "horizontal"})
 
-plt.savefig('E:/MySQL_data/titanic_survival_exploration-master/titanic_pearson.jpg',dpi=600)  
+plt.savefig('titanic_pearson.jpg',dpi=600)  
 ```
 
 
@@ -1524,7 +1524,7 @@ model = dt.fit(x,titanic['Survived'])
 
 
 ```python
-test = pd.read_csv('E:/Python_learning/learning_DC/chapter_4/test.csv')
+test = pd.read_csv('test.csv')
 ```
 
 
