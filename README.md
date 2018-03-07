@@ -3,8 +3,8 @@
 
 ## 结果
 
-训练集最高得分：0.801372，采用决策树(DecisionTree)测试集得分为：0.7703
-![myscole](https://github.com/incipient1/titanic_machinelearn_from_disaster/blob/master/test_score_kaggle.PNG myscole)
+训练集最高得分：0.801372，采用决策树(DecisionTree)测试集得分为：0.7703<br>
+![myscole](https://github.com/incipient1/titanic_machinelearn_from_disaster/blob/master/test_score_kaggle.PNG)
 
 ## 数据清洗
 
@@ -2242,7 +2242,7 @@ test.sample(4)
 
 ```python
 out = test[['PassengerId','Survived']]
-out.to_csv('E:/Python_learning/learning_DC/chapter_4/titanic_model_dt.csv',
+out.to_csv('titanic_model_dt.csv',
            index=False)
 ```
 
@@ -2276,7 +2276,7 @@ decimal='.'  )
 ```python
 titanic[['Survived','Pclass','SibSp','Parch','sex','title',
              'embarked','isalone','age*pclass','fareband_num']].\
-to_csv('E:\\Python_learning\\learning_DC\\chapter_4\\titanic_new_fetr.csv',
+to_csv('titanic_new_fetr.csv',
        index=False)
 ```
 
@@ -2284,5 +2284,5 @@ to_csv('E:\\Python_learning\\learning_DC\\chapter_4\\titanic_new_fetr.csv',
 ```python
 test[['Pclass','SibSp','Parch','sex','title',
              'embarked','isalone','age*pclass','fareband_num']].\
-to_csv('E:\\Python_learning\\learning_DC\\chapter_4\\test_new_fetr.csv',index=False)
+to_csv('test_new_fetr.csv',index=False)
 ```
