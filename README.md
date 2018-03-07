@@ -4,7 +4,7 @@
 ## 结果
 
 训练集最高得分：0.801372，采用决策树(DecisionTree)测试集得分为：0.7703
-![myscole](C:/Users/incipient/Desktop/test_score_kaggle.png myscole)
+![myscole](https://github.com/incipient1/titanic_machinelearn_from_disaster/blob/master/test_score_kaggle.PNG myscole)
 
 ## 数据清洗
 
