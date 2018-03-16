@@ -4,7 +4,7 @@
 ## 结果
 
 训练集最高得分：0.801372，模型：决策树(DecisionTree)，测试集得分为：0.77033<br>
-![myscole](https://github.com/incipient1/titanic_machinelearn_from_disaster/blob/master/test_score_kaggle.PNG)
+![myscole](https://github.com/incipient1/titanic_machinelearn_from_disaster/blob/master/img/test_score_kaggle.PNG)
 
 ## 数据清洗
 
@@ -1854,9 +1854,9 @@ sep=', ',
 na_rep='',
 float_format=None,
 columns=None,
-header=True,          # 是否包括标题
-index=True,
-index_label=None,
+header=True,          # 是否包括标题, 也可以直接为一个list，一一对应替换掉columns
+index=True,           # 是否包括索引列
+index_label=None,     # 索引这列的列名称是
 mode='w',
 encoding=None,
 compression=None,
