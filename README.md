@@ -1,9 +1,9 @@
 
-# Titanic: Machine Learning from Disaster
+# [Titanic:\_Machine_Learning_from_Disaster](https://www.kaggle.com/c/titanic)
 
 ## 结果
 
-训练集最高得分：0.801372，采用决策树(DecisionTree)测试集得分为：0.7703<br>
+训练集最高得分：0.801372，模型：决策树(DecisionTree)，测试集得分为：0.77033<br>
 ![myscole](https://github.com/incipient1/titanic_machinelearn_from_disaster/blob/master/test_score_kaggle.PNG)
 
 ## 数据清洗
@@ -34,156 +34,21 @@ s
 
 
 
-假设在`'Survived'`中全部填零，预测的正确率差不多也有`61.61% == 1 - 平均生存概率`
+假设在`'Survived'`中全部填零，预测的正确率差不多也有`61.61% == 1 - 平均生存概率`<br>
+将列`Sex`标签化
 
 
 ```python
 titanic['sex'] = titanic['Sex']
 titanic.loc[titanic['sex'] == 'female','sex'] = 0
 titanic.loc[titanic['sex'] == 'male','sex'] = 1
-titanic.sample(6)
+titanic.sample(6)  # 选6行数据看看
 ```
 
 
 
 
-<div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>PassengerId</th>
-      <th>Survived</th>
-      <th>Pclass</th>
-      <th>Name</th>
-      <th>Sex</th>
-      <th>Age</th>
-      <th>SibSp</th>
-      <th>Parch</th>
-      <th>Ticket</th>
-      <th>Fare</th>
-      <th>Cabin</th>
-      <th>Embarked</th>
-      <th>sex</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>301</th>
-      <td>302</td>
-      <td>1</td>
-      <td>3</td>
-      <td>McCoy, Mr. Bernard</td>
-      <td>male</td>
-      <td>NaN</td>
-      <td>2</td>
-      <td>0</td>
-      <td>367226</td>
-      <td>23.25</td>
-      <td>NaN</td>
-      <td>Q</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>356</th>
-      <td>357</td>
-      <td>1</td>
-      <td>1</td>
-      <td>Bowerman, Miss. Elsie Edith</td>
-      <td>female</td>
-      <td>22.0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>113505</td>
-      <td>55.00</td>
-      <td>E33</td>
-      <td>S</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>668</th>
-      <td>669</td>
-      <td>0</td>
-      <td>3</td>
-      <td>Cook, Mr. Jacob</td>
-      <td>male</td>
-      <td>43.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>A/5 3536</td>
-      <td>8.05</td>
-      <td>NaN</td>
-      <td>S</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>159</th>
-      <td>160</td>
-      <td>0</td>
-      <td>3</td>
-      <td>Sage, Master. Thomas Henry</td>
-      <td>male</td>
-      <td>NaN</td>
-      <td>8</td>
-      <td>2</td>
-      <td>CA. 2343</td>
-      <td>69.55</td>
-      <td>NaN</td>
-      <td>S</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>153</th>
-      <td>154</td>
-      <td>0</td>
-      <td>3</td>
-      <td>van Billiard, Mr. Austin Blyler</td>
-      <td>male</td>
-      <td>40.5</td>
-      <td>0</td>
-      <td>2</td>
-      <td>A/5. 851</td>
-      <td>14.50</td>
-      <td>NaN</td>
-      <td>S</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>812</th>
-      <td>813</td>
-      <td>0</td>
-      <td>2</td>
-      <td>Slemen, Mr. Richard James</td>
-      <td>male</td>
-      <td>35.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>28206</td>
-      <td>10.50</td>
-      <td>NaN</td>
-      <td>S</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-`.loc(行索引,列索引)`返回满足索引条件的值(只有一个时)或者DataFrame，默认优先采用自定义索引，无自定义索引时采用系统索引，相反的时`iloc`
+`.loc(行索引,列索引)`返回满足索引条件的值(只有一个时)或者DataFrame，默认优先采用自定义索引，无自定义索引时采用系统索引，相反的是`iloc`
 
 将Sex中的值数字化，也可以采用LabelEncoder，代码如下：
 ```
@@ -192,11 +57,12 @@ le = LabelEncoder()
 le.fit(titanic['sex'])
 le.transform(titanic['sex'])
 ```
-但是用le有可能指定male为0，所以手动指定
+但是用le有可能指定male为0，所以手动指定<br>
+查看数据整体情况
 
 
 ```python
-titanic.describe()
+titanic.describe() # 仅展示值为数字的列
 ```
 
 
@@ -316,7 +182,7 @@ titanic.describe()
 
 
 
-`.describe()`输出的结果仍然是`pandas.core.frame.DataFrame`对象，用来整体描述数据中值全部为数字的列
+`.describe()`输出的结果仍然是`pandas.core.frame.DataFrame`对象
 
 
 ```python
@@ -341,11 +207,12 @@ titanic.info()
     sex            891 non-null object
     dtypes: float64(2), int64(5), object(6)
     memory usage: 90.6+ KB
-    
 
-`Age`这列中有NaN，需要单独处理NaN的值；
-`Embarked`这一列有2个空值，需要单独处理；
+
+`Age`这列中有NaN，需要单独处理NaN的值；<br>
+`Embarked`这一列有2个空值，需要单独处理；<br>
 `.info()`生成的仍然是`Nonetype`对象，所以不能对它进行切片、定位操作；
+### 生成`Title`（称谓）列
 
 
 ```python
@@ -475,7 +342,7 @@ pd.crosstab(titanic['Title'],titanic['Sex'])
 
 
 
-`.extract(' ([A-Za-z]+)\.',expand=False)`从字符串中提取出符合正则表达式`' ([A-Za-z]+)\.'`的字符串，目的是从`Name`中把称谓提取出来；
+`.extract(' ([A-Za-z]+)\.',expand=False)`从字符串中提取出符合正则表达式`' ([A-Za-z]+)\.'`的字符串，目的是从`Name`中把称谓提取出来；<br>
 `pandas.crosstab(index,columns)`默认计算两个或多个factor(因子)出现的频次。Title中值不一样但是意思一样的，需要合并，例如Mme和Mrs，Mlle、Ms和Miss；出现频次很少，意思又不一样的，统一成一类。
 
 
@@ -486,7 +353,8 @@ titanic['Title'] = titanic['Title'].replace(['Mlle','Ms'], 'Miss')
 titanic['Title'] = titanic['Title'].replace('Mme', 'Mrs')
 ```
 
-`.repalce(消失值,返回值)`
+`.repalce(消失值,返回值)`<br>
+将Title标签化
 
 
 ```python
@@ -498,6 +366,7 @@ titanic.loc[titanic['Title'] == 'Mrs','title'] = 3
 titanic.loc[titanic['Title'] == 'Rare','title'] = 4
 ```
 
+将Embarked（登船港口）标签化
 
 ```python
 titanic['embarked'] = titanic['Embarked']
@@ -507,7 +376,8 @@ titanic['embarked'] = titanic['embarked'].replace('Q',int(2))
 titanic['embarked'].fillna(3,inplace=True)
 ```
 
-`.fillna()`用新值替换值为空NaN的，当然上面也可以采用`.loc`的方法
+`.fillna()`用新值替换值为空NaN的，当然上面也可以采用`.loc`的方法<br>
+探索Embarked和生存是否有关系
 
 
 ```python
@@ -567,8 +437,8 @@ titanic[['embarked','Survived']].groupby(
 
 
 
-生存率在不同登船口岸中也有差异；
-`.groupby()`分类汇总，返回一个DF对象；`.mean()`DF中的值为每个类所有值的期望；`sort_values(by,axis=0,ascending=True)`默认根据by这个索引在axis轴进行升序排序。
+生存率在不同登船口岸中也有差异；<br>
+`.groupby()`分类汇总，返回一个DF对象；`.mean()`DF中的值为每个类所有值的期望；`sort_values(by,axis=0,ascending=True)`根据by这一列在axis轴进行升序排序。
 
 
 ```python
@@ -582,141 +452,15 @@ titanic['embarked'].count()
 
 
 
-经过替换，embarked中无空值NaN
-
-
-```python
-titanic.sample(4)
-```
-
-
-
-
-<div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>PassengerId</th>
-      <th>Survived</th>
-      <th>Pclass</th>
-      <th>Name</th>
-      <th>Sex</th>
-      <th>Age</th>
-      <th>SibSp</th>
-      <th>Parch</th>
-      <th>Ticket</th>
-      <th>Fare</th>
-      <th>Cabin</th>
-      <th>Embarked</th>
-      <th>sex</th>
-      <th>Title</th>
-      <th>title</th>
-      <th>embarked</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>153</th>
-      <td>154</td>
-      <td>0</td>
-      <td>3</td>
-      <td>van Billiard, Mr. Austin Blyler</td>
-      <td>male</td>
-      <td>40.5</td>
-      <td>0</td>
-      <td>2</td>
-      <td>A/5. 851</td>
-      <td>14.5</td>
-      <td>NaN</td>
-      <td>S</td>
-      <td>1</td>
-      <td>Mr</td>
-      <td>2</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>263</th>
-      <td>264</td>
-      <td>0</td>
-      <td>1</td>
-      <td>Harrison, Mr. William</td>
-      <td>male</td>
-      <td>40.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>112059</td>
-      <td>0.0</td>
-      <td>B94</td>
-      <td>S</td>
-      <td>1</td>
-      <td>Mr</td>
-      <td>2</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>841</th>
-      <td>842</td>
-      <td>0</td>
-      <td>2</td>
-      <td>Mudd, Mr. Thomas Charles</td>
-      <td>male</td>
-      <td>16.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>S.O./P.P. 3</td>
-      <td>10.5</td>
-      <td>NaN</td>
-      <td>S</td>
-      <td>1</td>
-      <td>Mr</td>
-      <td>2</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>416</th>
-      <td>417</td>
-      <td>1</td>
-      <td>2</td>
-      <td>Drew, Mrs. James Vivian (Lulu Thorne Christian)</td>
-      <td>female</td>
-      <td>34.0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>28220</td>
-      <td>32.5</td>
-      <td>NaN</td>
-      <td>S</td>
-      <td>0</td>
-      <td>Mrs</td>
-      <td>3</td>
-      <td>0.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
+经过替换，embarked中无空值NaN，因为count()不统计空值
+### 处理age中的空值
 
 
 ```python
 guess_ages = np.zeros((2,3))
 for i in range(2):
     for j in range(3):
-        guess_df = titanic[(titanic['sex']==i) & 
+        guess_df = titanic[(titanic['sex']==i) &
                            (titanic['Pclass']==j+1)]['Age'].dropna()
         age_guess = guess_df.median()
         guess_ages[i,j] = int( age_guess/0.5 +0.5 ) * 0.5
@@ -738,9 +482,9 @@ guess_ages
 ```python
 for i in range(2):
     for j in range(3):
-        titanic.loc[(titanic.Age.isnull() & (titanic['sex']==i) & 
+        titanic.loc[(titanic.Age.isnull() & (titanic['sex']==i) &
                            (titanic['Pclass']==j+1),'Age')] = guess_ages[i,j]
-        
+
 ```
 
 
@@ -821,6 +565,7 @@ titanic[['age','Survived']].groupby('age',as_index=False).mean()
 
 不同年龄段生存率是有差异的，壮年段(3)的生存率低于平均值，其它都比平均值高，体现了人性的光辉
 
+### 增加标签isalone
 
 ```python
 titanic['isalone'] = 0
@@ -877,7 +622,7 @@ titanic[['isalone','Survived']].groupby('isalone',as_index=False).mean()
 
 
 孤身一人的生存概率低
-
+### 增加标签age\*pclass
 
 ```python
 titanic['age*pclass'] = titanic['age'] * titanic.Pclass
@@ -1121,14 +866,14 @@ for i in range(fareband_count-1):
     left = float(left)
     right = fare_line_data.loc[i,'fareband'].right
     right = float(right)
-    titanic.loc[(titanic.fareband_num > left) & 
+    titanic.loc[(titanic.fareband_num > left) &
                 (titanic.fareband_num <= right),'fareband_num'] = 1 + i
 
 titanic.loc[titanic.fareband_num > right,'fareband_num'] = fareband_count
 ```
 
-分段完成后将每段参数化；
-因为分段时右边界为closed(']'),为了防止在分界点处小数点的影响，所以在分界的最右应单独处理；
+分段完成后将每段参数化；<br>
+因为分段时右边界为closed(']'),为了防止在分界点处小数点的影响，所以在分界的最右应单独处理；<br>
 整体趋势：船费越贵，存活率越高
 
 
@@ -1358,7 +1103,7 @@ sns.heatmap(y,mask=mask,square=False,vmin=-1,vmax=1,\
             robust=True,annot=True,center=1,linewidth=0.5,fmt='>5.2f',ax=ax,
             cbar_ax=cbar_ax,cbar_kws={"orientation": "horizontal"})
 
-plt.savefig('titanic_pearson.jpg',dpi=600)  
+plt.savefig('titanic_pearson.jpg',dpi=600)
 ```
 
 
@@ -1372,13 +1117,13 @@ plt.savefig('titanic_pearson.jpg',dpi=600)
 * 整体设置图的基本情况
 ```
 sns.set(
-context='notebook',         
+context='notebook',
 style='darkgrid',        # 背景模式，可选：darkgrid黑色网格, whitegrid白色网格,
-                         # dark,white, ticks 
+                         # dark,white, ticks
 palette='deep',          # 调色板
 font='sans-serif',       # 字体
 font_scale=1,            # 字体缩放大小
-color_codes=False,           
+color_codes=False,
 rc=None               # 重设其它系统默认设置，例如更改系统默认的字体：
                       # plt.rcParams['font.sans-serif']=['SimHei']
 )
@@ -1391,7 +1136,7 @@ plt.subplots_adjust(left=0.15,  # 子图(x、y轴围成的那个矩形)左边开
                     bottom=0.1, # 下边从哪里开始
                     top=0.9 )   # 高度结束位置
 ```
-                    
+
 * 将colorbar 水平放置，直接从官网中抄下来的
 ```
 grid_kws = {"height_ratios": (.85, .05), "hspace": .3}
@@ -1411,7 +1156,7 @@ annot=True,       # 是否把数据标到每个小图中
 center=1,         # colorbar中颜色最深的位置其实我想实现的是-1为蓝，0为无色，1为绿色，未果
 linewidth=0.5,    # 图中网格线的线宽
 fmt='>5.2f',      # 标注的数字的格式：右对齐5个字符保留两位小数
-ax=ax, 
+ax=ax,
 cbar_ax=cbar_ax,
 cbar_kws={"orientation": "horizontal"}) # 方向：水平
 ```
@@ -1428,7 +1173,7 @@ x = titanic[['Pclass','SibSp','Parch','sex','title',
 
 ```python
 from sklearn import tree,linear_model,neighbors,ensemble
- 
+
 
 dt = tree.DecisionTreeClassifier()
 lm = linear_model.LogisticRegression()
@@ -1548,7 +1293,7 @@ test.info()
     Embarked       418 non-null object
     dtypes: float64(2), int64(4), object(5)
     memory usage: 36.0+ KB
-    
+
 
 注意Fare中有**1个**NaN，train中的Fare没有NaN，一定要处理
 
@@ -1568,7 +1313,7 @@ test_guess_age = np.zeros((2,3))
 ```python
 for i in range(2):
     for j in range(3):
-        test_df = test[(test['sex'] == i) & 
+        test_df = test[(test['sex'] == i) &
                            (test['Pclass'] == j+1)]['Age'].dropna()
         test_df_age = test_df.median()
         test_guess_age[i,j] = int(test_df_age / 0.5 + 0.5) + 0.5
@@ -1593,7 +1338,7 @@ test['age'] = test['Age']
 ```python
 for i in range(2):
     for j in range(3):
-        test.loc[test.age.isnull() & (test['sex'] == i) & 
+        test.loc[test.age.isnull() & (test['sex'] == i) &
                            (test['Pclass'] == j+1),'age' ] = test_guess_age[i,j]
 
 
@@ -1796,7 +1541,7 @@ fare_line_data = titanic[['fareband_','Survived']].groupby('fareband_',\
 as_index=False).mean()
 
 fare_line_data
-    
+
 ```
 
 
@@ -1887,7 +1632,7 @@ for i in range(fareband_count):
     left = fare_line_data.loc[i,'fareband_'].left
     left = float(left)
     right = fare_line_data.loc[i,'fareband_'].right
-    
+
     test.loc[(test['fareband_num'] > left) & (test['fareband_num'] <= right),'fareband_num'] = 1 + i
 ```
 
@@ -1962,7 +1707,7 @@ test.loc[test.Fare.isnull(),'Sex']
 test.loc[test['Fare'].isnull(),'fareband_num'] = 4
 ```
 
-手动处理test中Fare为NaN的数据，将其归到4。其为男性，男性中位数船费为13，属于 4 
+手动处理test中Fare为NaN的数据，将其归到4。其为男性，男性中位数船费为13，属于 4
 
 
 ```python
@@ -2081,7 +1826,7 @@ test_feature.info()
     fareband_num    418 non-null float32
     dtypes: float32(1), float64(1), int64(4), object(3)
     memory usage: 27.8+ KB
-    
+
 
 数据中不能有一个空值NaN
 
@@ -2250,24 +1995,24 @@ out.to_csv('titanic_model_dt.csv',
 ```
 pandas.DataFrame.to_csv(
 path_or_buf=None,      # 存储路径
-sep=', ', 
+sep=', ',
 na_rep='',
-float_format=None, 
-columns=None, 
+float_format=None,
+columns=None,
 header=True,          # 是否包括标题
-index=True, 
+index=True,
 index_label=None,
-mode='w', 
-encoding=None, 
-compression=None, 
-quoting=None, 
-quotechar='"', 
-line_terminator='\n', 
-chunksize=None, 
-tupleize_cols=None, 
-date_format=None, 
-doublequote=True, 
-escapechar=None, 
+mode='w',
+encoding=None,
+compression=None,
+quoting=None,
+quotechar='"',
+line_terminator='\n',
+chunksize=None,
+tupleize_cols=None,
+date_format=None,
+doublequote=True,
+escapechar=None,
 decimal='.'  )
 ```
 然后将数据提交到[kaggle](https://www.kaggle.com/c/titanic)即完成
