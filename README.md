@@ -1111,7 +1111,7 @@ plt.savefig('titanic_pearson.jpg',dpi=600)
 
 
 
-![png](output_47_1.png)
+![各特征之间的关系](https://github.com/incipient1/titanic_machinelearn_from_disaster/blob/master/img/output_47_1.png)
 
 
 * 整体设置图的基本情况
@@ -1838,151 +1838,6 @@ test['Survived'] = ty
 ```
 
 
-```python
-test.sample(4)
-```
-
-
-
-
-<div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>PassengerId</th>
-      <th>Pclass</th>
-      <th>Name</th>
-      <th>Sex</th>
-      <th>Age</th>
-      <th>SibSp</th>
-      <th>Parch</th>
-      <th>Ticket</th>
-      <th>Fare</th>
-      <th>Cabin</th>
-      <th>Embarked</th>
-      <th>sex</th>
-      <th>age</th>
-      <th>Title</th>
-      <th>title</th>
-      <th>embarked</th>
-      <th>isalone</th>
-      <th>age*pclass</th>
-      <th>fareband_num</th>
-      <th>Survived</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>391</th>
-      <td>1283</td>
-      <td>1</td>
-      <td>Lines, Mrs. Ernest H (Elizabeth Lindsey James)</td>
-      <td>female</td>
-      <td>51.0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>PC 17592</td>
-      <td>39.4000</td>
-      <td>D28</td>
-      <td>S</td>
-      <td>0</td>
-      <td>4.0</td>
-      <td>Mrs</td>
-      <td>3</td>
-      <td>0</td>
-      <td>0</td>
-      <td>4.0</td>
-      <td>8.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>417</th>
-      <td>1309</td>
-      <td>3</td>
-      <td>Peter, Master. Michael J</td>
-      <td>male</td>
-      <td>NaN</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2668</td>
-      <td>22.3583</td>
-      <td>NaN</td>
-      <td>C</td>
-      <td>1</td>
-      <td>4.0</td>
-      <td>Master</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>12.0</td>
-      <td>7.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>150</th>
-      <td>1042</td>
-      <td>1</td>
-      <td>Earnshaw, Mrs. Boulton (Olive Potter)</td>
-      <td>female</td>
-      <td>23.0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>11767</td>
-      <td>83.1583</td>
-      <td>C54</td>
-      <td>C</td>
-      <td>0</td>
-      <td>3.0</td>
-      <td>Mrs</td>
-      <td>3</td>
-      <td>1</td>
-      <td>0</td>
-      <td>3.0</td>
-      <td>10.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>238</th>
-      <td>1130</td>
-      <td>2</td>
-      <td>Hiltunen, Miss. Marta</td>
-      <td>female</td>
-      <td>18.0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>250650</td>
-      <td>13.0000</td>
-      <td>NaN</td>
-      <td>S</td>
-      <td>0</td>
-      <td>2.0</td>
-      <td>Miss</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>4.0</td>
-      <td>5.0</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
 
 
 ```python
@@ -2017,7 +1872,7 @@ decimal='.'  )
 ```
 然后将数据提交到[kaggle](https://www.kaggle.com/c/titanic)即完成
 
-
+将清洗后的数据保存下来，再用9个模型分别尝试，找出最优的模型：Titanic_sklearn_9models.ipynb
 ```python
 titanic[['Survived','Pclass','SibSp','Parch','sex','title',
              'embarked','isalone','age*pclass','fareband_num']].\
